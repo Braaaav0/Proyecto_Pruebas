@@ -1,5 +1,11 @@
 # Sistema de Biblioteca
 
+➤ **Aplicación en línea: https://biblioteca-lz5p.onrender.com**
+(`admin` / `Admin123!` — `bibliotecario` / `Biblio123!`)
+
+> Servicio gratuito: la primera visita puede tardar ~30-50 s en despertar, y los datos
+> vuelven al estado de ejemplo cada vez que el servicio se reinicia.
+
 Aplicación web para gestionar el catálogo, los usuarios y los préstamos de una biblioteca, construida a partir de `Historias de usuario.md` (HU-001 a HU-012).
 
 - **Login** con roles (HU-001) y **menú** por tipo de usuario (HU-002)
@@ -30,8 +36,21 @@ npm start             # http://localhost:3000
 La aplicación necesita un servidor que ejecute Node: GitHub Pages solo sirve archivos
 estáticos y no puede levantar Express ni SQLite.
 
-El repositorio incluye `render.yaml`, así que el despliegue es de un clic:
-**Render → New → Blueprint → elegir este repositorio → Apply**.
+Desplegado en **Render** (plan gratuito) en https://biblioteca-lz5p.onrender.com
+
+El servicio se creó con la opción **New → Web Service → Public Git Repository**, pegando
+la URL de este repositorio. Esa vía no requiere conectar la cuenta de GitHub (útil para
+quien no es dueño del repositorio), pero **no hace despliegue automático**: tras subir
+cambios hay que pulsar *Manual Deploy → Deploy latest commit* en el panel de Render.
+
+Ajustes del servicio (equivalentes al `render.yaml` incluido, que sirve si se prefiere
+**New → Blueprint** con la cuenta de GitHub conectada):
+
+| Campo | Valor |
+|---|---|
+| Build Command | `npm install` |
+| Start Command | `npm run seed:demo && npm start` |
+| Variable de entorno | `NODE_ENV=production` |
 
 - Plan gratuito, sin disco persistente: el servicio se suspende tras ~15 min sin
   tráfico y, al reiniciarse, la base de datos vuelve a cero. `startCommand` ejecuta
