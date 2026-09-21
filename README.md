@@ -31,6 +31,16 @@ npm start             # http://localhost:3000
 
 **Cambie las contraseñas antes de usarlo fuera de un entorno de práctica**: defina `ADMIN_PASSWORD` y `BIBLIOTECARIO_PASSWORD` antes del *primer* arranque (solo se aplican cuando la base de datos aún no tiene cuentas). Otras variables: `PORT` (3000), `DB_FILE` (`data/biblioteca.db`), `NODE_ENV=production` (marca la cookie como `Secure`; requiere HTTPS).
 
+## Documentación
+
+| Documento | Contenido |
+|---|---|
+| [Manual de usuario](docs/MANUAL_USUARIO.md) | Uso del sistema pantalla por pantalla, con los resultados esperados de cada historia y un guion de prueba manual |
+| [Manual de instalación y configuración](docs/MANUAL_INSTALACION.md) | Requisitos, instalación local, variables de entorno, despliegue y solución de problemas |
+| [Análisis tecnológico](docs/ANALISIS_TECNOLOGICO.md) | Por qué este lenguaje, base de datos y API de libros |
+| [Informe de pruebas TDD](docs/INFORME_PRUEBAS_TDD.md) | Metodología, ciclos rojo/verde, cobertura y trazabilidad |
+| [Historias de usuario](Historias%20de%20usuario.md) | HU-001 a HU-012 con criterios de aceptación |
+
 ## Despliegue (Render)
 
 La aplicación necesita un servidor que ejecute Node: GitHub Pages solo sirve archivos
