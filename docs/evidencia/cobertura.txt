@@ -1,0 +1,257 @@
+
+> biblioteca-app@1.0.0 test:coverage
+> node --disable-warning=ExperimentalWarning --test --experimental-test-coverage --test-reporter=spec
+
+▶ HU-001 Inicio de sesión
+  ✔ credenciales correctas dan acceso y devuelven el usuario sin datos sensibles (184.573ms)
+  ✔ la cookie de sesión es HttpOnly y SameSite=Strict (99.4562ms)
+  ✔ usuario vacío es rechazado con 400 y detalle del campo (10.9406ms)
+  ✔ contraseña vacía es rechazada con 400 y detalle del campo (9.4093ms)
+  ✔ ambos campos ausentes o en blanco son rechazados (18.8654ms)
+  ✔ contraseña incorrecta muestra mensaje de error y no entrega cookie (110.8099ms)
+  ✔ usuario inexistente recibe el mismo mensaje (no revela qué campo falló) (7.5895ms)
+  ✔ sin sesión, /api/auth/me devuelve 401 (12.9086ms)
+  ✔ con sesión, /api/auth/me devuelve el usuario autenticado (80.5357ms)
+  ✔ cerrar sesión invalida la cookie (no puede reutilizarse) (63.535ms)
+  ✔ la sesión expira a las 8 horas (64.5738ms)
+  ✔ un token inventado no da acceso (4.7579ms)
+✔ HU-001 Inicio de sesión (865.4009ms)
+▶ HU-008 Gestión de estados de préstamo
+  ✔ el sistema trae registrados los estados Prestado, Devuelto y Atrasado (202.7183ms)
+  ✔ consulta un estado por id (18.5113ms)
+  ✔ modifica el nombre visible sin alterar el código interno (24.3602ms)
+  ✔ exige nombre y rechaza nombres repetidos (33.5451ms)
+  ✔ no se pueden crear ni eliminar estados (son parte de la lógica del préstamo) (49.2152ms)
+  ✔ solo el administrador puede modificar (118.6697ms)
+✔ HU-008 Gestión de estados de préstamo (651.5773ms)
+▶ HU-007 Gestión de libros
+  ✔ registra un libro y lo muestra como Disponible con los nombres de autor, categoría y editorial (17.2795ms)
+  ✔ exige "titulo" (10.4759ms)
+  ✔ exige "anio_publicacion" (7.665ms)
+  ✔ exige "autor_id" (8.5257ms)
+  ✔ exige "categoria_id" (13.7774ms)
+  ✔ exige "editorial_id" (12.4706ms)
+  ✔ el ISBN es opcional (6.0743ms)
+  ✔ rechaza un ISBN con formato inválido (5.9632ms)
+  ✔ rechaza años no numéricos, muy antiguos o futuros lejanos (27.5645ms)
+  ✔ acepta el año como texto numérico (formularios HTML) (8.5274ms)
+  ✔ rechaza referencias a autor, categoría o editorial inexistentes (29.04ms)
+  ✔ lista y consulta libros con su disponibilidad (22.837ms)
+  ✔ busca por título, autor o ISBN con ?q= (24.7885ms)
+  ✔ modifica un libro, pero no permite cambiar la disponibilidad a mano (15.3562ms)
+  ✔ elimina un libro que no tiene préstamos (19.1361ms)
+✔ HU-007 Gestión de libros (627.4914ms)
+▶ HU-003 Gestión de usuarios
+  ✔ registra un registro válido y responde 201 con su id (212.3679ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (21.4467ms)
+  ✔ rechaza "nombre" en blanco (10.317ms)
+  ✔ rechaza el registro si falta "documento" (campo obligatorio) (7.9658ms)
+  ✔ rechaza "documento" en blanco (7.7763ms)
+  ✔ rechaza el registro si falta "correo" (campo obligatorio) (13.2325ms)
+  ✔ rechaza "correo" en blanco (8.7799ms)
+  ✔ rechaza el registro si falta "telefono" (campo obligatorio) (8.5686ms)
+  ✔ rechaza "telefono" en blanco (11.0817ms)
+  ✔ recorta espacios sobrantes al guardar (9.4304ms)
+  ✔ consulta el listado y un registro por id (30.9049ms)
+  ✔ un id inexistente o inválido responde 404 (21.8354ms)
+  ✔ modifica un registro existente (16.5255ms)
+  ✔ la modificación también valida los campos obligatorios (14.2102ms)
+  ✔ modificar un registro inexistente responde 404 (11.581ms)
+  ✔ elimina un registro y luego ya no existe (15.6335ms)
+  ✔ eliminar un registro inexistente responde 404 (5.5816ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (12.8386ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (75.228ms)
+  ✔ sin sesión responde 401 (6.5924ms)
+✔ HU-003 Gestión de usuarios (722.2509ms)
+▶ HU-004 Gestión de autores
+  ✔ registra un registro válido y responde 201 con su id (86.9894ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (4.1154ms)
+  ✔ rechaza "nombre" en blanco (3.8634ms)
+  ✔ rechaza el registro si falta "apellido" (campo obligatorio) (3.1153ms)
+  ✔ rechaza "apellido" en blanco (3.138ms)
+  ✔ recorta espacios sobrantes al guardar (3.7736ms)
+  ✔ consulta el listado y un registro por id (6.4054ms)
+  ✔ un id inexistente o inválido responde 404 (7.8793ms)
+  ✔ modifica un registro existente (11.4969ms)
+  ✔ la modificación también valida los campos obligatorios (5.3861ms)
+  ✔ modificar un registro inexistente responde 404 (2.5008ms)
+  ✔ elimina un registro y luego ya no existe (5.4706ms)
+  ✔ eliminar un registro inexistente responde 404 (1.9178ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (5.8192ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (54.8311ms)
+  ✔ sin sesión responde 401 (4.3243ms)
+✔ HU-004 Gestión de autores (321.9459ms)
+▶ HU-005 Gestión de categorías
+  ✔ registra un registro válido y responde 201 con su id (69.9234ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (4.5371ms)
+  ✔ rechaza "nombre" en blanco (3.1915ms)
+  ✔ rechaza el registro si falta "descripcion" (campo obligatorio) (4.0196ms)
+  ✔ rechaza "descripcion" en blanco (3.6034ms)
+  ✔ recorta espacios sobrantes al guardar (4.6842ms)
+  ✔ consulta el listado y un registro por id (17.7993ms)
+  ✔ un id inexistente o inválido responde 404 (4.8439ms)
+  ✔ modifica un registro existente (9.2242ms)
+  ✔ la modificación también valida los campos obligatorios (4.5942ms)
+  ✔ modificar un registro inexistente responde 404 (5.7845ms)
+  ✔ elimina un registro y luego ya no existe (8.2843ms)
+  ✔ eliminar un registro inexistente responde 404 (2.2299ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (9.5223ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (61.2334ms)
+  ✔ sin sesión responde 401 (7.5762ms)
+✔ HU-005 Gestión de categorías (316.3382ms)
+▶ HU-006 Gestión de editoriales
+  ✔ registra un registro válido y responde 201 con su id (65.905ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (3.216ms)
+  ✔ rechaza "nombre" en blanco (4.7258ms)
+  ✔ rechaza el registro si falta "telefono" (campo obligatorio) (4.2641ms)
+  ✔ rechaza "telefono" en blanco (2.5959ms)
+  ✔ rechaza el registro si falta "correo" (campo obligatorio) (2.9434ms)
+  ✔ rechaza "correo" en blanco (2.6056ms)
+  ✔ recorta espacios sobrantes al guardar (4.0701ms)
+  ✔ consulta el listado y un registro por id (5.6733ms)
+  ✔ un id inexistente o inválido responde 404 (13.3572ms)
+  ✔ modifica un registro existente (7.7465ms)
+  ✔ la modificación también valida los campos obligatorios (5.681ms)
+  ✔ modificar un registro inexistente responde 404 (3.1145ms)
+  ✔ elimina un registro y luego ya no existe (5.6504ms)
+  ✔ eliminar un registro inexistente responde 404 (2.0639ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (9.3336ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (57.3956ms)
+  ✔ sin sesión responde 401 (4.3748ms)
+✔ HU-006 Gestión de editoriales (308.193ms)
+▶ HU-003 reglas propias de usuarios
+  ✔ rechaza correos con formato inválido (46.5993ms)
+  ✔ rechaza teléfonos con letras o demasiado cortos (3.5831ms)
+  ✔ no permite documentos duplicados (409), ni al crear ni al modificar (7.7194ms)
+  ✔ permite conservar el mismo documento al modificar el propio registro (3.3016ms)
+✔ HU-003 reglas propias de usuarios (142.6885ms)
+▶ HU-005 el nombre de la categoría es único
+  ✔ rechaza un nombre repetido, sin importar mayúsculas (409) (53.6765ms)
+  ✔ rechaza renombrar a un nombre ya usado por otra categoría (3.7174ms)
+✔ HU-005 el nombre de la categoría es único (134.1378ms)
+▶ HU-006 correo de editorial
+  ✔ rechaza correos inválidos (47.5134ms)
+✔ HU-006 correo de editorial (134.0598ms)
+▶ Integridad referencial de las maestras
+  ✔ no se elimina un autor con libros asociados (409) (1.4778ms)
+  ✔ no se elimina una categoría con libros asociados (409) (1.5557ms)
+  ✔ no se elimina una editorial con libros asociados (409) (1.5957ms)
+✔ Integridad referencial de las maestras (122.2111ms)
+▶ HU-002 Menú principal
+  ✔ el menú exige sesión (87.3304ms)
+  ✔ el administrador ve las 5 pantallas maestras, estados, préstamos y reportes (125.0973ms)
+  ✔ el bibliotecario solo ve préstamos y reportes (sin maestras) (111.417ms)
+  ✔ cada opción trae título, grupo y ruta para navegar (10.0403ms)
+  ✔ el menú informa el usuario y rol conectados (7.8963ms)
+  ✔ las rutas de API de administración rechazan al bibliotecario con 403 (7.5061ms)
+✔ HU-002 Menú principal (538.7293ms)
+▶ Integración con Open Library (catálogo externo de libros)
+  ✔ exige sesión (87.4441ms)
+  ✔ exige un texto de búsqueda de al menos 2 caracteres (160.9176ms)
+  ✔ consulta search.json de Open Library con el texto codificado y un límite (27.1728ms)
+  ✔ normaliza los resultados: título, autores, año, editorial, ISBN-13 y temas (12.726ms)
+  ✔ tolera resultados con datos faltantes (7.6892ms)
+  ✔ si Open Library responde con error devuelve 502 con mensaje claro (230.4099ms)
+  ✔ si no hay red devuelve 502 (el resto de la app sigue funcionando) (212.2113ms)
+✔ Integración con Open Library (catálogo externo de libros) (935.7216ms)
+▶ HU-009 Registrar préstamo de libro
+  ✔ registra el préstamo con fecha de hoy, fecha límite a 14 días y estado Prestado (13.63ms)
+  ✔ el libro prestado pasa a estado "Prestado" (no disponible) (27.2482ms)
+  ✔ impide prestar un libro que ya está prestado (409) y no crea un segundo préstamo (20.1179ms)
+  ✔ permite indicar los días de préstamo (10.094ms)
+  ✔ rechaza días de préstamo fuera de 1 a 90 o no numéricos (35.0128ms)
+  ✔ exige usuario y libro (4.2367ms)
+  ✔ solo acepta usuarios y libros registrados (5.3931ms)
+  ✔ el bibliotecario también puede registrar préstamos (66.4476ms)
+  ✔ sin sesión no se puede prestar (401) (3.9294ms)
+  ✔ la base de datos rechaza dos préstamos activos del mismo libro (red de seguridad) (1.0608ms)
+✔ HU-009 Registrar préstamo de libro (689.9678ms)
+▶ HU-010 Registrar devolución de libro
+  ✔ consulta los préstamos activos (7.7177ms)
+  ✔ registra la devolución: fecha de hoy y estado Devuelto (55.8795ms)
+  ✔ el libro vuelve a estar Disponible (2.004ms)
+  ✔ el préstamo devuelto se conserva en el historial pero sale de los activos (4.3572ms)
+  ✔ no se puede devolver dos veces el mismo préstamo (409) (2.1226ms)
+  ✔ devolver un préstamo inexistente responde 404 (5.2423ms)
+  ✔ un libro devuelto puede volver a prestarse (2.9542ms)
+  ✔ el bibliotecario puede registrar devoluciones (46.8532ms)
+✔ HU-010 Registrar devolución de libro (354.1978ms)
+▶ Estado "Atrasado" automático en los préstamos
+  ✔ el día del vencimiento todavía está Prestado (58.0131ms)
+  ✔ al día siguiente pasa a Atrasado y muestra los días de retraso (59.0618ms)
+  ✔ un préstamo atrasado puede devolverse y queda como Devuelto (8.2435ms)
+✔ Estado "Atrasado" automático en los préstamos (322.2911ms)
+▶ El historial de préstamos protege a usuarios y libros
+  ✔ no se elimina un usuario que tiene préstamos (409) (3.8338ms)
+  ✔ no se elimina un libro que tiene préstamos (409) (3.2101ms)
+  ✔ sí se elimina un usuario sin préstamos (2.7224ms)
+✔ El historial de préstamos protege a usuarios y libros (208.8629ms)
+▶ HU-011 Reporte de libros prestados
+  ✔ muestra únicamente los préstamos activos (17.6434ms)
+  ✔ cada fila trae usuario, título, fecha de préstamo y fecha límite (7.0158ms)
+  ✔ filtra por usuario (nombre o documento, parcial) (10.4212ms)
+  ✔ filtra por título del libro (6.5401ms)
+  ✔ combina filtros y devuelve vacío cuando nada coincide (7.4153ms)
+  ✔ incluye también los préstamos atrasados, porque el libro sigue fuera (78.6482ms)
+  ✔ está disponible para el bibliotecario y exige sesión (59.9341ms)
+  ✔ sin préstamos activos devuelve lista vacía (184.2872ms)
+✔ HU-011 Reporte de libros prestados (908.289ms)
+▶ HU-012 Reporte de préstamos atrasados
+  ✔ cuando no hay préstamos atrasados muestra un mensaje (4.5396ms)
+  ✔ un préstamo no está atrasado hasta que pasa su fecha límite (69.2775ms)
+  ✔ identifica automáticamente los vencidos, sin acción manual (62.0602ms)
+  ✔ muestra usuario responsable, libro pendiente, fecha límite y días de retraso (3.4879ms)
+  ✔ el estado Atrasado queda guardado en el préstamo (2.923ms)
+  ✔ ordena de mayor a menor retraso (13.1767ms)
+  ✔ los préstamos devueltos desaparecen del reporte (8.06ms)
+  ✔ está disponible para el bibliotecario y exige sesión (59.222ms)
+✔ HU-012 Reporte de préstamos atrasados (395.1755ms)
+▶ fechas (base de HU-009 y HU-012)
+  ✔ fechaISO devuelve YYYY-MM-DD en hora local (2.7428ms)
+  ✔ sumarDias suma días dentro del mes (0.7064ms)
+  ✔ sumarDias cruza fin de mes y de año (0.2871ms)
+  ✔ diasEntre calcula la diferencia en días (con signo) (1.8697ms)
+✔ fechas (base de HU-009 y HU-012) (7.8884ms)
+▶ auth (base de HU-001)
+  ✔ hashPassword no guarda la contraseña en claro y usa sal distinta (121.0777ms)
+  ✔ verifyPassword acepta la correcta y rechaza la incorrecta (188.2183ms)
+  ✔ verifyPassword tolera hashes mal formados (0.5037ms)
+  ✔ nuevoToken genera valores únicos y largos (0.857ms)
+✔ auth (base de HU-001) (311.4686ms)
+ℹ tests 174
+ℹ suites 21
+ℹ pass 174
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2683.8695
+ℹ start of coverage report
+ℹ -----------------------------------------------------------------
+ℹ file             | line % | branch % | funcs % | uncovered lines
+ℹ -----------------------------------------------------------------
+ℹ src              |        |          |         | 
+ℹ  app.js          |  93.94 |    88.89 |   83.33 | 59-62
+ℹ  auth.js         | 100.00 |   100.00 |  100.00 | 
+ℹ  db.js           | 100.00 |    83.33 |  100.00 | 
+ℹ  errores.js      | 100.00 |   100.00 |  100.00 | 
+ℹ  fechas.js       | 100.00 |   100.00 |  100.00 | 
+ℹ  menu.js         | 100.00 |   100.00 |  100.00 | 
+ℹ  routes          |        |          |         | 
+ℹ   auth.js        | 100.00 |   100.00 |  100.00 | 
+ℹ   crud.js        | 100.00 |   100.00 |   94.12 | 
+ℹ   maestras.js    | 100.00 |   100.00 |  100.00 | 
+ℹ   openlibrary.js |  90.91 |    90.00 |  100.00 | 17-18
+ℹ   prestamos.js   | 100.00 |   100.00 |  100.00 | 
+ℹ  services        |        |          |         | 
+ℹ   openlibrary.js | 100.00 |    89.47 |  100.00 | 
+ℹ   prestamos.js   |  97.67 |    97.14 |   92.86 | 53-55
+ℹ  sesion.js       | 100.00 |   100.00 |  100.00 | 
+ℹ  validators.js   | 100.00 |    89.13 |  100.00 | 
+ℹ tests            |        |          |         | 
+ℹ  fixtures.js     | 100.00 |   100.00 |  100.00 | 
+ℹ  helpers.js      | 100.00 |    93.55 |  100.00 | 
+ℹ -----------------------------------------------------------------
+ℹ all files        |  99.10 |    95.37 |   97.14 | 
+ℹ -----------------------------------------------------------------
+ℹ end of coverage report

@@ -1,0 +1,22 @@
+OK   login visible 
+OK   login vacío muestra errores obligatorios 
+OK   credenciales incorrectas muestran error 
+OK   menú principal visible para admin 
+OK   recorrió 10 rutas sin errores JS 
+OK   autor sin datos muestra validaciones 
+OK   autor creado aparece en la tabla 
+OK   el HTML del dato se muestra como texto (sin XSS) 
+OK   Open Library rellena título y año Ficciones / 1945
+OK   Open Library selecciona el autor existente (Jorge Luis Borges) Jorge Luis Borges
+OK   libro creado desde Open Library 
+OK   préstamo registrado 
+OK   el libro prestado ya no aparece como disponible 
+OK   devolución registrada 
+OK   reporte prestados: filtro sin resultados 
+OK   reporte atrasados muestra días de retraso 
+OK   cerrar sesión vuelve al login 
+OK   bibliotecario ve solo operación y reportes Inicio|Préstamos y devoluciones|Libros prestados|Préstamos atrasados
+OK   bibliotecario no accede a maestras por URL 
+OK   sin errores de consola/JS en todo el recorrido 
+
+RESUMEN: 20/20 pasos OK

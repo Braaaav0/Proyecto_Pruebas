@@ -1,0 +1,831 @@
+
+> biblioteca-app@1.0.0 test
+> node --disable-warning=ExperimentalWarning --test --test-reporter=spec
+
+▶ HU-001 Inicio de sesión
+  ✔ credenciales correctas dan acceso y devuelven el usuario sin datos sensibles (131.7478ms)
+  ✔ la cookie de sesión es HttpOnly y SameSite=Strict (84.0189ms)
+  ✔ usuario vacío es rechazado con 400 y detalle del campo (15.8503ms)
+  ✔ contraseña vacía es rechazada con 400 y detalle del campo (11.0579ms)
+  ✔ ambos campos ausentes o en blanco son rechazados (13.169ms)
+  ✔ contraseña incorrecta muestra mensaje de error y no entrega cookie (81.6121ms)
+  ✔ usuario inexistente recibe el mismo mensaje (no revela qué campo falló) (7.5726ms)
+  ✔ sin sesión, /api/auth/me devuelve 401 (11.9204ms)
+  ✔ con sesión, /api/auth/me devuelve el usuario autenticado (82.6321ms)
+  ✔ cerrar sesión invalida la cookie (no puede reutilizarse) (52.1731ms)
+  ✔ la sesión expira a las 8 horas (48.2982ms)
+  ✔ un token inventado no da acceso (2.2537ms)
+✔ HU-001 Inicio de sesión (709.738ms)
+▶ HU-008 Gestión de estados de préstamo
+  ✔ el sistema trae registrados los estados Prestado, Devuelto y Atrasado (165.7762ms)
+  ✔ consulta un estado por id (25.2367ms)
+  ✔ modifica el nombre visible sin alterar el código interno (34.3518ms)
+  ✔ exige nombre y rechaza nombres repetidos (35.8188ms)
+  ✔ no se pueden crear ni eliminar estados (son parte de la lógica del préstamo) (19.2351ms)
+  ✔ solo el administrador puede modificar (99.9486ms)
+✔ HU-008 Gestión de estados de préstamo (558.4579ms)
+▶ HU-007 Gestión de libros
+  ✔ registra un libro y lo muestra como Disponible con los nombres de autor, categoría y editorial (12.5343ms)
+  ✔ exige "titulo" (16.2338ms)
+  ✔ exige "anio_publicacion" (43.1814ms)
+  ✔ exige "autor_id" (9.8196ms)
+  ✔ exige "categoria_id" (8.5521ms)
+  ✔ exige "editorial_id" (10.7817ms)
+  ✔ el ISBN es opcional (12.0955ms)
+  ✔ rechaza un ISBN con formato inválido (9.5224ms)
+  ✔ rechaza años no numéricos, muy antiguos o futuros lejanos (21.4451ms)
+  ✔ acepta el año como texto numérico (formularios HTML) (7.1613ms)
+  ✔ rechaza referencias a autor, categoría o editorial inexistentes (22.1899ms)
+  ✔ lista y consulta libros con su disponibilidad (19.4025ms)
+  ✔ busca por título, autor o ISBN con ?q= (19.7177ms)
+  ✔ modifica un libro, pero no permite cambiar la disponibilidad a mano (13.5899ms)
+  ✔ elimina un libro que no tiene préstamos (7.7554ms)
+✔ HU-007 Gestión de libros (562.3524ms)
+▶ HU-003 Gestión de usuarios
+  ✔ registra un registro válido y responde 201 con su id (167.0647ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (19.303ms)
+  ✔ rechaza "nombre" en blanco (13.9998ms)
+  ✔ rechaza el registro si falta "documento" (campo obligatorio) (9.7776ms)
+  ✔ rechaza "documento" en blanco (21.924ms)
+  ✔ rechaza el registro si falta "correo" (campo obligatorio) (10.507ms)
+  ✔ rechaza "correo" en blanco (9.6319ms)
+  ✔ rechaza el registro si falta "telefono" (campo obligatorio) (9.8461ms)
+  ✔ rechaza "telefono" en blanco (11.3274ms)
+  ✔ recorta espacios sobrantes al guardar (7.9292ms)
+  ✔ consulta el listado y un registro por id (34.8586ms)
+  ✔ un id inexistente o inválido responde 404 (9.7545ms)
+  ✔ modifica un registro existente (17.3594ms)
+  ✔ la modificación también valida los campos obligatorios (9.8452ms)
+  ✔ modificar un registro inexistente responde 404 (4.7273ms)
+  ✔ elimina un registro y luego ya no existe (10.1234ms)
+  ✔ eliminar un registro inexistente responde 404 (2.3851ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (12.4094ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (61.4088ms)
+  ✔ sin sesión responde 401 (3.2597ms)
+✔ HU-003 Gestión de usuarios (627.0682ms)
+▶ HU-004 Gestión de autores
+  ✔ registra un registro válido y responde 201 con su id (48.1849ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (1.7936ms)
+  ✔ rechaza "nombre" en blanco (1.7646ms)
+  ✔ rechaza el registro si falta "apellido" (campo obligatorio) (4.5566ms)
+  ✔ rechaza "apellido" en blanco (2.3567ms)
+  ✔ recorta espacios sobrantes al guardar (1.67ms)
+  ✔ consulta el listado y un registro por id (5.3797ms)
+  ✔ un id inexistente o inválido responde 404 (3.6268ms)
+  ✔ modifica un registro existente (4.5444ms)
+  ✔ la modificación también valida los campos obligatorios (3.3199ms)
+  ✔ modificar un registro inexistente responde 404 (2.4305ms)
+  ✔ elimina un registro y luego ya no existe (4.2533ms)
+  ✔ eliminar un registro inexistente responde 404 (1.6737ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (4.1157ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (43.3826ms)
+  ✔ sin sesión responde 401 (2.4681ms)
+✔ HU-004 Gestión de autores (231.3113ms)
+▶ HU-005 Gestión de categorías
+  ✔ registra un registro válido y responde 201 con su id (42.596ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (1.8302ms)
+  ✔ rechaza "nombre" en blanco (1.7363ms)
+  ✔ rechaza el registro si falta "descripcion" (campo obligatorio) (1.3465ms)
+  ✔ rechaza "descripcion" en blanco (1.3719ms)
+  ✔ recorta espacios sobrantes al guardar (1.6129ms)
+  ✔ consulta el listado y un registro por id (2.1505ms)
+  ✔ un id inexistente o inválido responde 404 (4.974ms)
+  ✔ modifica un registro existente (3.2174ms)
+  ✔ la modificación también valida los campos obligatorios (2.9851ms)
+  ✔ modificar un registro inexistente responde 404 (1.1767ms)
+  ✔ elimina un registro y luego ya no existe (3.0194ms)
+  ✔ eliminar un registro inexistente responde 404 (0.9987ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.9432ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (40.8682ms)
+  ✔ sin sesión responde 401 (2.2048ms)
+✔ HU-005 Gestión de categorías (189.1619ms)
+▶ HU-006 Gestión de editoriales
+  ✔ registra un registro válido y responde 201 con su id (36.8899ms)
+  ✔ rechaza el registro si falta "nombre" (campo obligatorio) (1.259ms)
+  ✔ rechaza "nombre" en blanco (1.501ms)
+  ✔ rechaza el registro si falta "telefono" (campo obligatorio) (1.2317ms)
+  ✔ rechaza "telefono" en blanco (1.3137ms)
+  ✔ rechaza el registro si falta "correo" (campo obligatorio) (1.0682ms)
+  ✔ rechaza "correo" en blanco (1.5238ms)
+  ✔ recorta espacios sobrantes al guardar (1.5027ms)
+  ✔ consulta el listado y un registro por id (2.5687ms)
+  ✔ un id inexistente o inválido responde 404 (4.4669ms)
+  ✔ modifica un registro existente (2.7271ms)
+  ✔ la modificación también valida los campos obligatorios (1.7049ms)
+  ✔ modificar un registro inexistente responde 404 (1.0069ms)
+  ✔ elimina un registro y luego ya no existe (2.3476ms)
+  ✔ eliminar un registro inexistente responde 404 (0.8243ms)
+  ✔ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.5252ms)
+  ✔ el bibliotecario puede consultar pero no modificar (403) (38.2006ms)
+  ✔ sin sesión responde 401 (1.9857ms)
+✔ HU-006 Gestión de editoriales (173.5642ms)
+▶ HU-003 reglas propias de usuarios
+  ✔ rechaza correos con formato inválido (48.6591ms)
+  ✔ rechaza teléfonos con letras o demasiado cortos (1.9327ms)
+  ✔ no permite documentos duplicados (409), ni al crear ni al modificar (3.3974ms)
+  ✔ permite conservar el mismo documento al modificar el propio registro (2.0529ms)
+✔ HU-003 reglas propias de usuarios (120.4783ms)
+▶ HU-005 el nombre de la categoría es único
+  ✔ rechaza un nombre repetido, sin importar mayúsculas (409) (40.3746ms)
+  ✔ rechaza renombrar a un nombre ya usado por otra categoría (2.6619ms)
+✔ HU-005 el nombre de la categoría es único (107.3071ms)
+▶ HU-006 correo de editorial
+  ✔ rechaza correos inválidos (36.0792ms)
+✔ HU-006 correo de editorial (99.3707ms)
+▶ Integridad referencial de las maestras
+  ✔ no se elimina un autor con libros asociados (409) (1.1046ms)
+  ✔ no se elimina una categoría con libros asociados (409) (0.9307ms)
+  ✔ no se elimina una editorial con libros asociados (409) (0.9902ms)
+✔ Integridad referencial de las maestras (105.1429ms)
+▶ HU-002 Menú principal
+  ✔ el menú exige sesión (71.7521ms)
+  ✔ el administrador ve las 5 pantallas maestras, estados, préstamos y reportes (92.47ms)
+  ✔ el bibliotecario solo ve préstamos y reportes (sin maestras) (142.0166ms)
+  ✔ cada opción trae título, grupo y ruta para navegar (15.7151ms)
+  ✔ el menú informa el usuario y rol conectados (13.1289ms)
+  ✔ las rutas de API de administración rechazan al bibliotecario con 403 (7.6478ms)
+✔ HU-002 Menú principal (497.6875ms)
+▶ Integración con Open Library (catálogo externo de libros)
+  ✔ exige sesión (64.1848ms)
+  ✔ exige un texto de búsqueda de al menos 2 caracteres (134.0883ms)
+  ✔ consulta search.json de Open Library con el texto codificado y un límite (10.7045ms)
+  ✔ normaliza los resultados: título, autores, año, editorial, ISBN-13 y temas (13.5214ms)
+  ✔ tolera resultados con datos faltantes (9.6729ms)
+  ✔ si Open Library responde con error devuelve 502 con mensaje claro (237.2672ms)
+  ✔ si no hay red devuelve 502 (el resto de la app sigue funcionando) (144.8662ms)
+✔ Integración con Open Library (catálogo externo de libros) (764.2315ms)
+▶ HU-009 Registrar préstamo de libro
+  ✖ registra el préstamo con fecha de hoy, fecha límite a 14 días y estado Prestado (10.6495ms)
+  ✖ el libro prestado pasa a estado "Prestado" (no disponible) (14.8158ms)
+  ✖ impide prestar un libro que ya está prestado (409) y no crea un segundo préstamo (13.0948ms)
+  ✖ permite indicar los días de préstamo (7.4861ms)
+  ✖ rechaza días de préstamo fuera de 1 a 90 o no numéricos (7.1078ms)
+  ✖ exige usuario y libro (5.5748ms)
+  ✖ solo acepta usuarios y libros registrados (6.3869ms)
+  ✖ el bibliotecario también puede registrar préstamos (54.0119ms)
+  ✔ sin sesión no se puede prestar (401) (3.5252ms)
+  ✖ la base de datos rechaza dos préstamos activos del mismo libro (red de seguridad) (0.6428ms)
+✖ HU-009 Registrar préstamo de libro (570.3312ms)
+▶ HU-010 Registrar devolución de libro
+  ✖ consulta los préstamos activos (3.9225ms)
+  ✖ registra la devolución: fecha de hoy y estado Devuelto (2.8097ms)
+  ✖ el libro vuelve a estar Disponible (2.5839ms)
+  ✖ el préstamo devuelto se conserva en el historial pero sale de los activos (1.9586ms)
+  ✖ no se puede devolver dos veces el mismo préstamo (409) (3.0839ms)
+  ✖ devolver un préstamo inexistente responde 404 (4.9016ms)
+  ✖ un libro devuelto puede volver a prestarse (3.2649ms)
+  ✖ el bibliotecario puede registrar devoluciones (3.2442ms)
+✖ HU-010 Registrar devolución de libro (186.7012ms)
+▶ Estado "Atrasado" automático en los préstamos
+  ✖ el día del vencimiento todavía está Prestado (1.8227ms)
+  ✖ al día siguiente pasa a Atrasado y muestra los días de retraso (1.9095ms)
+  ✖ un préstamo atrasado puede devolverse y queda como Devuelto (1.9564ms)
+✖ Estado "Atrasado" automático en los préstamos (135.3372ms)
+▶ El historial de préstamos protege a usuarios y libros
+  ✖ no se elimina un usuario que tiene préstamos (409) (1.3574ms)
+  ✖ no se elimina un libro que tiene préstamos (409) (1.2983ms)
+  ✔ sí se elimina un usuario sin préstamos (1.1935ms)
+✖ El historial de préstamos protege a usuarios y libros (127.6312ms)
+▶ HU-011 Reporte de libros prestados
+  ✖ muestra únicamente los préstamos activos (14.1385ms)
+  ✖ cada fila trae usuario, título, fecha de préstamo y fecha límite (7.809ms)
+  ✖ filtra por usuario (nombre o documento, parcial) (6.2352ms)
+  ✖ filtra por título del libro (5.3425ms)
+  ✖ combina filtros y devuelve vacío cuando nada coincide (5.5887ms)
+  ✖ incluye también los préstamos atrasados, porque el libro sigue fuera (4.8234ms)
+  ✖ está disponible para el bibliotecario y exige sesión (54.1537ms)
+  ✖ sin préstamos activos devuelve lista vacía (142.6674ms)
+✖ HU-011 Reporte de libros prestados (701.9582ms)
+▶ HU-012 Reporte de préstamos atrasados
+  ✖ cuando no hay préstamos atrasados muestra un mensaje (2.2087ms)
+  ✖ un préstamo no está atrasado hasta que pasa su fecha límite (3.2291ms)
+  ✖ identifica automáticamente los vencidos, sin acción manual (2.4051ms)
+  ✖ muestra usuario responsable, libro pendiente, fecha límite y días de retraso (2.7215ms)
+  ✖ el estado Atrasado queda guardado en el préstamo (1.6817ms)
+  ✖ ordena de mayor a menor retraso (8.1366ms)
+  ✖ los préstamos devueltos desaparecen del reporte (1.827ms)
+  ✖ está disponible para el bibliotecario y exige sesión (41.0249ms)
+✖ HU-012 Reporte de préstamos atrasados (200.4542ms)
+▶ fechas (base de HU-009 y HU-012)
+  ✔ fechaISO devuelve YYYY-MM-DD en hora local (2.3699ms)
+  ✔ sumarDias suma días dentro del mes (0.6683ms)
+  ✔ sumarDias cruza fin de mes y de año (0.3311ms)
+  ✔ diasEntre calcula la diferencia en días (con signo) (0.1973ms)
+✔ fechas (base de HU-009 y HU-012) (5.4214ms)
+▶ auth (base de HU-001)
+  ✔ hashPassword no guarda la contraseña en claro y usa sal distinta (99.4226ms)
+  ✔ verifyPassword acepta la correcta y rechaza la incorrecta (144.1186ms)
+  ✔ verifyPassword tolera hashes mal formados (0.3862ms)
+  ✔ nuevoToken genera valores únicos y largos (2.1406ms)
+✔ auth (base de HU-001) (246.8251ms)
+ℹ tests 174
+ℹ suites 21
+ℹ pass 136
+ℹ fail 38
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4201.795
+
+✖ failing tests:
+
+test at tests\prestamos.test.js:15:3
+✖ registra el préstamo con fecha de hoy, fecha límite a 14 días y estado Prestado (10.6495ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:17:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:27:3
+✖ el libro prestado pasa a estado "Prestado" (no disponible) (14.8158ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:29:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:33:3
+✖ impide prestar un libro que ya está prestado (409) y no crea un segundo préstamo (13.0948ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:36:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:41:3
+✖ permite indicar los días de préstamo (7.4861ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:43:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:47:3
+✖ rechaza días de préstamo fuera de 1 a 90 o no numéricos (7.1078ms)
+  AssertionError [ERR_ASSERTION]: 0
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:50:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:56:3
+✖ exige usuario y libro (5.5748ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:58:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:62:3
+✖ solo acepta usuarios y libros registrados (6.3869ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:64:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:71:3
+✖ el bibliotecario también puede registrar préstamos (54.0119ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:73:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:81:3
+✖ la base de datos rechaza dos préstamos activos del mismo libro (red de seguridad) (0.6428ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:86:12)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /UNIQUE/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:102:3
+✖ consulta los préstamos activos (3.9225ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:104:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:109:3
+✖ registra la devolución: fecha de hoy y estado Devuelto (2.8097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  401 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:112:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:118:3
+✖ el libro vuelve a estar Disponible (2.5839ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - true
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:120:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:124:3
+✖ el préstamo devuelto se conserva en el historial pero sale de los activos (1.9586ms)
+  TypeError: historial.some is not a function
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:126:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\prestamos.test.js:131:3
+✖ no se puede devolver dos veces el mismo préstamo (409) (3.0839ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  401 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:133:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:136:3
+✖ devolver un préstamo inexistente responde 404 (4.9016ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  401 !== 404
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:137:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 404,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:141:3
+✖ un libro devuelto puede volver a prestarse (3.2649ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  401 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:143:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:146:3
+✖ el bibliotecario puede registrar devoluciones (3.2442ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:148:57)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\prestamos.test.js:164:3
+✖ el día del vencimiento todavía está Prestado (1.8227ms)
+  TypeError: Cannot read properties of undefined (reading 'estado')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:167:20)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\prestamos.test.js:171:3
+✖ al día siguiente pasa a Atrasado y muestra los días de retraso (1.9095ms)
+  TypeError: Cannot read properties of undefined (reading 'estado')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:174:20)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\prestamos.test.js:179:3
+✖ un préstamo atrasado puede devolverse y queda como Devuelto (1.9564ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  401 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:181:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:199:3
+✖ no se elimina un usuario que tiene préstamos (409) (1.3574ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  204 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:201:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 204,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\prestamos.test.js:205:3
+✖ no se elimina un libro que tiene préstamos (409) (1.2983ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  204 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/prestamos.test.js:207:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 204,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:20:3
+✖ muestra únicamente los préstamos activos (14.1385ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:22:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:28:3
+✖ cada fila trae usuario, título, fecha de préstamo y fecha límite (7.809ms)
+  TypeError: Cannot read properties of undefined (reading 'find')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:30:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:36:3
+✖ filtra por usuario (nombre o documento, parcial) (6.2352ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:38:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:44:3
+✖ filtra por título del libro (5.3425ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:46:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:50:3
+✖ combina filtros y devuelve vacío cuando nada coincide (5.5887ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:52:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:56:3
+✖ incluye también los préstamos atrasados, porque el libro sigue fuera (4.8234ms)
+  TypeError: Cannot read properties of undefined (reading 'length')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:59:24)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:64:3
+✖ está disponible para el bibliotecario y exige sesión (54.1537ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:65:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:69:3
+✖ sin préstamos activos devuelve lista vacía (142.6674ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   error: 'Ruta no encontrada'
+  -   items: [],
+  -   total: 0
+    }
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:72:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { error: 'Ruta no encontrada' },
+    expected: { items: [], total: 0 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:86:3
+✖ cuando no hay préstamos atrasados muestra un mensaje (2.2087ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:88:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:94:3
+✖ un préstamo no está atrasado hasta que pasa su fecha límite (3.2291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:98:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:101:3
+✖ identifica automáticamente los vencidos, sin acción manual (2.4051ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:104:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\reportes.test.js:108:3
+✖ muestra usuario responsable, libro pendiente, fecha límite y días de retraso (2.7215ms)
+  TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:109:20)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:116:3
+✖ el estado Atrasado queda guardado en el préstamo (1.6817ms)
+  TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:117:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:121:3
+✖ ordena de mayor a menor retraso (8.1366ms)
+  TypeError: Cannot read properties of undefined (reading 'map')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:129:28)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:132:3
+✖ los préstamos devueltos desaparecen del reporte (1.827ms)
+  TypeError: Cannot read properties of undefined (reading '0')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:134:43)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\reportes.test.js:139:3
+✖ está disponible para el bibliotecario y exige sesión (41.0249ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/reportes.test.js:140:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

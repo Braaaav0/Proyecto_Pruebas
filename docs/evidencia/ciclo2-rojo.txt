@@ -1,0 +1,1626 @@
+
+> biblioteca-app@1.0.0 test
+> node --disable-warning=ExperimentalWarning --test --test-reporter=spec
+
+▶ HU-001 Inicio de sesión
+  ✔ credenciales correctas dan acceso y devuelven el usuario sin datos sensibles (136.731ms)
+  ✔ la cookie de sesión es HttpOnly y SameSite=Strict (78.1389ms)
+  ✔ usuario vacío es rechazado con 400 y detalle del campo (14.501ms)
+  ✔ contraseña vacía es rechazada con 400 y detalle del campo (18.4026ms)
+  ✔ ambos campos ausentes o en blanco son rechazados (16.2135ms)
+  ✔ contraseña incorrecta muestra mensaje de error y no entrega cookie (89.3149ms)
+  ✔ usuario inexistente recibe el mismo mensaje (no revela qué campo falló) (6.1068ms)
+  ✔ sin sesión, /api/auth/me devuelve 401 (7.6483ms)
+  ✔ con sesión, /api/auth/me devuelve el usuario autenticado (51.2243ms)
+  ✔ cerrar sesión invalida la cookie (no puede reutilizarse) (46.279ms)
+  ✔ la sesión expira a las 8 horas (49.0509ms)
+  ✔ un token inventado no da acceso (2.0081ms)
+✔ HU-001 Inicio de sesión (683.5582ms)
+▶ HU-008 Gestión de estados de préstamo
+  ✖ el sistema trae registrados los estados Prestado, Devuelto y Atrasado (163.3214ms)
+  ✖ consulta un estado por id (19.0866ms)
+  ✖ modifica el nombre visible sin alterar el código interno (9.2635ms)
+  ✖ exige nombre y rechaza nombres repetidos (17.397ms)
+  ✖ no se pueden crear ni eliminar estados (son parte de la lógica del préstamo) (19.1869ms)
+  ✖ solo el administrador puede modificar (9.8136ms)
+✖ HU-008 Gestión de estados de préstamo (401.4003ms)
+▶ HU-007 Gestión de libros
+  ✖ registra un libro y lo muestra como Disponible con los nombres de autor, categoría y editorial (13.8846ms)
+  ✖ exige "titulo" (23.7984ms)
+  ✖ exige "anio_publicacion" (13.7489ms)
+  ✖ exige "autor_id" (8.1955ms)
+  ✖ exige "categoria_id" (9.2892ms)
+  ✖ exige "editorial_id" (12.7174ms)
+  ✖ el ISBN es opcional (20.312ms)
+  ✖ rechaza un ISBN con formato inválido (11.4703ms)
+  ✖ rechaza años no numéricos, muy antiguos o futuros lejanos (11.6239ms)
+  ✖ acepta el año como texto numérico (formularios HTML) (6.9953ms)
+  ✖ rechaza referencias a autor, categoría o editorial inexistentes (5.9596ms)
+  ✖ lista y consulta libros con su disponibilidad (8.5515ms)
+  ✖ busca por título, autor o ISBN con ?q= (10.8263ms)
+  ✖ modifica un libro, pero no permite cambiar la disponibilidad a mano (4.1536ms)
+  ✖ elimina un libro que no tiene préstamos (17.0577ms)
+✖ HU-007 Gestión de libros (507.9523ms)
+▶ HU-003 Gestión de usuarios
+  ✖ registra un registro válido y responde 201 con su id (150.4036ms)
+  ✖ rechaza el registro si falta "nombre" (campo obligatorio) (11.6294ms)
+  ✖ rechaza "nombre" en blanco (11.8111ms)
+  ✖ rechaza el registro si falta "documento" (campo obligatorio) (23.3006ms)
+  ✖ rechaza "documento" en blanco (12.9594ms)
+  ✖ rechaza el registro si falta "correo" (campo obligatorio) (8.7694ms)
+  ✖ rechaza "correo" en blanco (8.4848ms)
+  ✖ rechaza el registro si falta "telefono" (campo obligatorio) (8.6046ms)
+  ✖ rechaza "telefono" en blanco (20.7924ms)
+  ✖ recorta espacios sobrantes al guardar (9.8762ms)
+  ✖ consulta el listado y un registro por id (12.8794ms)
+  ✔ un id inexistente o inválido responde 404 (8.661ms)
+  ✖ modifica un registro existente (5.1529ms)
+  ✖ la modificación también valida los campos obligatorios (4.6992ms)
+  ✔ modificar un registro inexistente responde 404 (5.0531ms)
+  ✖ elimina un registro y luego ya no existe (3.8787ms)
+  ✔ eliminar un registro inexistente responde 404 (2.5543ms)
+  ✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (9.5561ms)
+  ✖ el bibliotecario puede consultar pero no modificar (403) (62.9071ms)
+  ✔ sin sesión responde 401 (5.4052ms)
+✖ HU-003 Gestión de usuarios (557.9827ms)
+▶ HU-004 Gestión de autores
+  ✖ registra un registro válido y responde 201 con su id (53.4506ms)
+  ✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.1782ms)
+  ✖ rechaza "nombre" en blanco (1.685ms)
+  ✖ rechaza el registro si falta "apellido" (campo obligatorio) (1.8259ms)
+  ✖ rechaza "apellido" en blanco (1.5494ms)
+  ✖ recorta espacios sobrantes al guardar (1.5499ms)
+  ✖ consulta el listado y un registro por id (2.192ms)
+  ✔ un id inexistente o inválido responde 404 (3.0672ms)
+  ✖ modifica un registro existente (3.1349ms)
+  ✖ la modificación también valida los campos obligatorios (1.6166ms)
+  ✔ modificar un registro inexistente responde 404 (1.6247ms)
+  ✖ elimina un registro y luego ya no existe (1.6008ms)
+  ✔ eliminar un registro inexistente responde 404 (1.4723ms)
+  ✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.8659ms)
+  ✖ el bibliotecario puede consultar pero no modificar (403) (41.6508ms)
+  ✔ sin sesión responde 401 (2.3096ms)
+✖ HU-004 Gestión de autores (208.6198ms)
+▶ HU-005 Gestión de categorías
+  ✖ registra un registro válido y responde 201 con su id (40.784ms)
+  ✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.5582ms)
+  ✖ rechaza "nombre" en blanco (1.4336ms)
+  ✖ rechaza el registro si falta "descripcion" (campo obligatorio) (1.5695ms)
+  ✖ rechaza "descripcion" en blanco (1.4725ms)
+  ✖ recorta espacios sobrantes al guardar (1.4249ms)
+  ✖ consulta el listado y un registro por id (1.497ms)
+  ✔ un id inexistente o inválido responde 404 (2.0651ms)
+  ✖ modifica un registro existente (1.2849ms)
+  ✖ la modificación también valida los campos obligatorios (1.8775ms)
+  ✔ modificar un registro inexistente responde 404 (1.5583ms)
+  ✖ elimina un registro y luego ya no existe (1.2582ms)
+  ✔ eliminar un registro inexistente responde 404 (1.0785ms)
+  ✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.3533ms)
+  ✖ el bibliotecario puede consultar pero no modificar (403) (35.5357ms)
+  ✔ sin sesión responde 401 (2.3874ms)
+✖ HU-005 Gestión de categorías (167.9978ms)
+▶ HU-006 Gestión de editoriales
+  ✖ registra un registro válido y responde 201 con su id (47.0937ms)
+  ✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.4908ms)
+  ✖ rechaza "nombre" en blanco (4.0095ms)
+  ✖ rechaza el registro si falta "telefono" (campo obligatorio) (2.0911ms)
+  ✖ rechaza "telefono" en blanco (1.8222ms)
+  ✖ rechaza el registro si falta "correo" (campo obligatorio) (1.6002ms)
+  ✖ rechaza "correo" en blanco (1.3464ms)
+  ✖ recorta espacios sobrantes al guardar (1.3082ms)
+  ✖ consulta el listado y un registro por id (1.4279ms)
+  ✔ un id inexistente o inválido responde 404 (2.0067ms)
+  ✖ modifica un registro existente (1.0688ms)
+  ✖ la modificación también valida los campos obligatorios (1.2386ms)
+  ✔ modificar un registro inexistente responde 404 (1.3581ms)
+  ✖ elimina un registro y luego ya no existe (1.5707ms)
+  ✔ eliminar un registro inexistente responde 404 (1.8013ms)
+  ✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.4537ms)
+  ✖ el bibliotecario puede consultar pero no modificar (403) (35.5695ms)
+  ✔ sin sesión responde 401 (1.9811ms)
+✖ HU-006 Gestión de editoriales (180.8082ms)
+▶ HU-003 reglas propias de usuarios
+  ✖ rechaza correos con formato inválido (38.4857ms)
+  ✖ rechaza teléfonos con letras o demasiado cortos (1.5819ms)
+  ✖ no permite documentos duplicados (409), ni al crear ni al modificar (1.6454ms)
+  ✖ permite conservar el mismo documento al modificar el propio registro (1.5574ms)
+✖ HU-003 reglas propias de usuarios (108.4732ms)
+▶ HU-005 el nombre de la categoría es único
+  ✖ rechaza un nombre repetido, sin importar mayúsculas (409) (43.2835ms)
+  ✖ rechaza renombrar a un nombre ya usado por otra categoría (2.7871ms)
+✖ HU-005 el nombre de la categoría es único (114.2387ms)
+▶ HU-006 correo de editorial
+  ✖ rechaza correos inválidos (38.5302ms)
+✖ HU-006 correo de editorial (104.8219ms)
+▶ Integridad referencial de las maestras
+  ✖ no se elimina un autor con libros asociados (409) (1.0925ms)
+  ✖ no se elimina una categoría con libros asociados (409) (1.8347ms)
+  ✖ no se elimina una editorial con libros asociados (409) (1.5766ms)
+✖ Integridad referencial de las maestras (115.4144ms)
+▶ HU-002 Menú principal
+  ✔ el menú exige sesión (60.6028ms)
+  ✔ el administrador ve las 5 pantallas maestras, estados, préstamos y reportes (85.1513ms)
+  ✔ el bibliotecario solo ve préstamos y reportes (sin maestras) (118.9989ms)
+  ✔ cada opción trae título, grupo y ruta para navegar (14.5422ms)
+  ✔ el menú informa el usuario y rol conectados (5.2078ms)
+  ✔ las rutas de API de administración rechazan al bibliotecario con 403 (5.9859ms)
+✔ HU-002 Menú principal (463.1439ms)
+▶ Integración con Open Library (catálogo externo de libros)
+  ✔ exige sesión (68.3416ms)
+  ✖ exige un texto de búsqueda de al menos 2 caracteres (123.781ms)
+  ✖ consulta search.json de Open Library con el texto codificado y un límite (11.3145ms)
+  ✖ normaliza los resultados: título, autores, año, editorial, ISBN-13 y temas (9.6063ms)
+  ✖ tolera resultados con datos faltantes (8.5529ms)
+  ✖ si Open Library responde con error devuelve 502 con mensaje claro (185.8961ms)
+  ✖ si no hay red devuelve 502 (el resto de la app sigue funcionando) (135.432ms)
+✖ Integración con Open Library (catálogo externo de libros) (714.2428ms)
+▶ fechas (base de HU-009 y HU-012)
+  ✔ fechaISO devuelve YYYY-MM-DD en hora local (1.8192ms)
+  ✔ sumarDias suma días dentro del mes (0.7161ms)
+  ✔ sumarDias cruza fin de mes y de año (0.3397ms)
+  ✔ diasEntre calcula la diferencia en días (con signo) (0.2923ms)
+✔ fechas (base de HU-009 y HU-012) (4.8529ms)
+▶ auth (base de HU-001)
+  ✔ hashPassword no guarda la contraseña en claro y usa sal distinta (104.7614ms)
+  ✔ verifyPassword acepta la correcta y rechaza la incorrecta (164.8615ms)
+  ✔ verifyPassword tolera hashes mal formados (3.3388ms)
+  ✔ nuevoToken genera valores únicos y largos (0.8823ms)
+✔ auth (base de HU-001) (274.7287ms)
+ℹ tests 134
+ℹ suites 15
+ℹ pass 43
+ℹ fail 91
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4100.8765
+
+✖ failing tests:
+
+test at tests\estados.test.js:10:3
+✖ el sistema trae registrados los estados Prestado, Devuelto y Atrasado (163.3214ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:12:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\estados.test.js:17:3
+✖ consulta un estado por id (19.0866ms)
+  TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:18:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\estados.test.js:24:3
+✖ modifica el nombre visible sin alterar el código interno (9.2635ms)
+  TypeError: (intermediate value).body.find is not a function
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:25:68)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\estados.test.js:33:3
+✖ exige nombre y rechaza nombres repetidos (17.397ms)
+  TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:34:20)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\estados.test.js:39:3
+✖ no se pueden crear ni eliminar estados (son parte de la lógica del préstamo) (19.1869ms)
+  TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:41:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\estados.test.js:45:3
+✖ solo el administrador puede modificar (9.8136ms)
+  TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/estados.test.js:46:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\libros.test.js:19:3
+✖ registra un libro y lo muestra como Disponible con los nombres de autor, categoría y editorial (13.8846ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:21:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:31:5
+✖ exige "titulo" (23.7984ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:34:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:31:5
+✖ exige "anio_publicacion" (13.7489ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:34:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:31:5
+✖ exige "autor_id" (8.1955ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:34:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:31:5
+✖ exige "categoria_id" (9.2892ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:34:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:31:5
+✖ exige "editorial_id" (12.7174ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:34:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:39:3
+✖ el ISBN es opcional (20.312ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:42:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:45:3
+✖ rechaza un ISBN con formato inválido (11.4703ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:47:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:51:3
+✖ rechaza años no numéricos, muy antiguos o futuros lejanos (11.6239ms)
+  AssertionError [ERR_ASSERTION]: dos mil
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:54:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:59:3
+✖ acepta el año como texto numérico (formularios HTML) (6.9953ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:61:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:65:3
+✖ rechaza referencias a autor, categoría o editorial inexistentes (5.9596ms)
+  AssertionError [ERR_ASSERTION]: autor_id
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:68:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:73:3
+✖ lista y consulta libros con su disponibilidad (8.5515ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:75:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:82:3
+✖ busca por título, autor o ISBN con ?q= (10.8263ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok((await ctx.get('/api/libros?q=soledad')).body.length >= 1)
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:83:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\libros.test.js:89:3
+✖ modifica un libro, pero no permite cambiar la disponibilidad a mano (4.1536ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:90:55)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\libros.test.js:97:3
+✖ elimina un libro que no tiene préstamos (17.0577ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 204
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/libros.test.js:99:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 204,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:40:5
+✖ registra un registro válido y responde 201 con su id (150.4036ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:42:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "nombre" (campo obligatorio) (11.6294ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "nombre" en blanco (11.8111ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "documento" (campo obligatorio) (23.3006ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "documento" en blanco (12.9594ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "correo" (campo obligatorio) (8.7694ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "correo" en blanco (8.4848ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "telefono" (campo obligatorio) (8.6046ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "telefono" en blanco (20.7924ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:61:5
+✖ recorta espacios sobrantes al guardar (9.8762ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:67:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:71:5
+✖ consulta el listado y un registro por id (12.8794ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:73:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:85:5
+✖ modifica un registro existente (5.1529ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:87:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:94:5
+✖ la modificación también valida los campos obligatorios (4.6992ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:96:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:104:5
+✖ elimina un registro y luego ya no existe (3.8787ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:107:54)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:115:5
+✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (9.5561ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:120:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:126:5
+✖ el bibliotecario puede consultar pero no modificar (403) (62.9071ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:127:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:40:5
+✖ registra un registro válido y responde 201 con su id (53.4506ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:42:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.1782ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "nombre" en blanco (1.685ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "apellido" (campo obligatorio) (1.8259ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "apellido" en blanco (1.5494ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:61:5
+✖ recorta espacios sobrantes al guardar (1.5499ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:67:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:71:5
+✖ consulta el listado y un registro por id (2.192ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:73:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:85:5
+✖ modifica un registro existente (3.1349ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:87:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:94:5
+✖ la modificación también valida los campos obligatorios (1.6166ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:96:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:104:5
+✖ elimina un registro y luego ya no existe (1.6008ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:107:54)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:115:5
+✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.8659ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:120:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:126:5
+✖ el bibliotecario puede consultar pero no modificar (403) (41.6508ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:127:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:40:5
+✖ registra un registro válido y responde 201 con su id (40.784ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:42:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.5582ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "nombre" en blanco (1.4336ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "descripcion" (campo obligatorio) (1.5695ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "descripcion" en blanco (1.4725ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:61:5
+✖ recorta espacios sobrantes al guardar (1.4249ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:67:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:71:5
+✖ consulta el listado y un registro por id (1.497ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:73:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:85:5
+✖ modifica un registro existente (1.2849ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:87:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:94:5
+✖ la modificación también valida los campos obligatorios (1.8775ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:96:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:104:5
+✖ elimina un registro y luego ya no existe (1.2582ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:107:54)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:115:5
+✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.3533ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:120:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:126:5
+✖ el bibliotecario puede consultar pero no modificar (403) (35.5357ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:127:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:40:5
+✖ registra un registro válido y responde 201 con su id (47.0937ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:42:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "nombre" (campo obligatorio) (2.4908ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "nombre" en blanco (4.0095ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "telefono" (campo obligatorio) (2.0911ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "telefono" en blanco (1.8222ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:48:7
+✖ rechaza el registro si falta "correo" (campo obligatorio) (1.6002ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:51:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:54:7
+✖ rechaza "correo" en blanco (1.3464ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:56:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:61:5
+✖ recorta espacios sobrantes al guardar (1.3082ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:67:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:71:5
+✖ consulta el listado y un registro por id (1.4279ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:73:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:85:5
+✖ modifica un registro existente (1.0688ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:87:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:94:5
+✖ la modificación también valida los campos obligatorios (1.2386ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:96:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:104:5
+✖ elimina un registro y luego ya no existe (1.5707ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:107:54)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:115:5
+✖ filtra el listado con ?q= (búsqueda parcial, sin distinguir mayúsculas) (2.4537ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:120:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:126:5
+✖ el bibliotecario puede consultar pero no modificar (403) (35.5695ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:127:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:146:3
+✖ rechaza correos con formato inválido (38.4857ms)
+  AssertionError [ERR_ASSERTION]: sin-arroba
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:149:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:154:3
+✖ rechaza teléfonos con letras o demasiado cortos (1.5819ms)
+  AssertionError [ERR_ASSERTION]: abc1234567
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:157:14)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:162:3
+✖ no permite documentos duplicados (409), ni al crear ni al modificar (1.6454ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:164:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:172:3
+✖ permite conservar el mismo documento al modificar el propio registro (1.5574ms)
+  TypeError: Cannot read properties of undefined (reading 'id')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:175:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\maestras.test.js:185:3
+✖ rechaza un nombre repetido, sin importar mayúsculas (409) (43.2835ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:188:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:192:3
+✖ rechaza renombrar a un nombre ya usado por otra categoría (2.7871ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:195:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:204:3
+✖ rechaza correos inválidos (38.5302ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:206:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:224:3
+✖ no se elimina un autor con libros asociados (409) (1.0925ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:226:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:229:3
+✖ no se elimina una categoría con libros asociados (409) (1.8347ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:230:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\maestras.test.js:232:3
+✖ no se elimina una editorial con libros asociados (409) (1.5766ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 409
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/maestras.test.js:233:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 409,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\openlibrary.test.js:44:3
+✖ exige un texto de búsqueda de al menos 2 caracteres (123.781ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 400
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:45:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\openlibrary.test.js:49:3
+✖ consulta search.json de Open Library con el texto codificado y un límite (11.3145ms)
+  TypeError: Cannot destructure property 'url' of 'falso.llamadas.at(...)' as it is undefined.
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:51:13)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\openlibrary.test.js:59:3
+✖ normaliza los resultados: título, autores, año, editorial, ISBN-13 y temas (9.6063ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:61:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\openlibrary.test.js:72:3
+✖ tolera resultados con datos faltantes (8.5529ms)
+  TypeError: Cannot read properties of undefined (reading '1')
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:74:41)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at tests\openlibrary.test.js:79:3
+✖ si Open Library responde con error devuelve 502 con mensaje claro (185.8961ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 502
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:82:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 502,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\openlibrary.test.js:87:3
+✖ si no hay red devuelve 502 (el resto de la app sigue funcionando) (135.432ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 502
+  
+      at TestContext.<anonymous> (file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/tests/openlibrary.test.js:90:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 502,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,80 @@
+
+> biblioteca-app@1.0.0 test
+> node --disable-warning=ExperimentalWarning --test --test-reporter=spec
+
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\USUARIO\Desktop\proyecto_pruebas\src\db.js' imported from C:\Users\USUARIO\Desktop\proyecto_pruebas\tests\helpers.js
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/src/db.js'
+}
+
+Node.js v24.11.0
+✖ tests\auth.test.js (78.1624ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\USUARIO\Desktop\proyecto_pruebas\src\db.js' imported from C:\Users\USUARIO\Desktop\proyecto_pruebas\tests\helpers.js
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/src/db.js'
+}
+
+Node.js v24.11.0
+✖ tests\menu.test.js (70.2512ms)
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\USUARIO\Desktop\proyecto_pruebas\src\fechas.js' imported from C:\Users\USUARIO\Desktop\proyecto_pruebas\tests\utils.test.js
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38)
+    at #link (node:internal/modules/esm/module_job:208:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/USUARIO/Desktop/proyecto_pruebas/src/fechas.js'
+}
+
+Node.js v24.11.0
+✖ tests\utils.test.js (73.6634ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.4732
+
+✖ failing tests:
+
+test at tests\auth.test.js:1:1
+✖ tests\auth.test.js (78.1624ms)
+  'test failed'
+
+test at tests\menu.test.js:1:1
+✖ tests\menu.test.js (70.2512ms)
+  'test failed'
+
+test at tests\utils.test.js:1:1
+✖ tests\utils.test.js (73.6634ms)
+  'test failed'

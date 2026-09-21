@@ -1,0 +1,46 @@
+
+> biblioteca-app@1.0.0 test
+> node --disable-warning=ExperimentalWarning --test --test-reporter=spec
+
+▶ HU-001 Inicio de sesión
+  ✔ credenciales correctas dan acceso y devuelven el usuario sin datos sensibles (307.7076ms)
+  ✔ la cookie de sesión es HttpOnly y SameSite=Strict (49.5138ms)
+  ✔ usuario vacío es rechazado con 400 y detalle del campo (6.6269ms)
+  ✔ contraseña vacía es rechazada con 400 y detalle del campo (12.0921ms)
+  ✔ ambos campos ausentes o en blanco son rechazados (6.331ms)
+  ✔ contraseña incorrecta muestra mensaje de error y no entrega cookie (44.7759ms)
+  ✔ usuario inexistente recibe el mismo mensaje (no revela qué campo falló) (2.3952ms)
+  ✔ sin sesión, /api/auth/me devuelve 401 (3.2991ms)
+  ✔ con sesión, /api/auth/me devuelve el usuario autenticado (42.6134ms)
+  ✔ cerrar sesión invalida la cookie (no puede reutilizarse) (41.4257ms)
+  ✔ la sesión expira a las 8 horas (41.7235ms)
+  ✔ un token inventado no da acceso (1.3135ms)
+✔ HU-001 Inicio de sesión (678.2726ms)
+▶ HU-002 Menú principal
+  ✔ el menú exige sesión (63.3005ms)
+  ✔ el administrador ve las 5 pantallas maestras, estados, préstamos y reportes (239.9197ms)
+  ✔ el bibliotecario solo ve préstamos y reportes (sin maestras) (53.2763ms)
+  ✔ cada opción trae título, grupo y ruta para navegar (4.0805ms)
+  ✔ el menú informa el usuario y rol conectados (3.9062ms)
+  ✔ las rutas de API de administración rechazan al bibliotecario con 403 (12.5796ms)
+✔ HU-002 Menú principal (495.6575ms)
+▶ fechas (base de HU-009 y HU-012)
+  ✔ fechaISO devuelve YYYY-MM-DD en hora local (1.7944ms)
+  ✔ sumarDias suma días dentro del mes (0.2802ms)
+  ✔ sumarDias cruza fin de mes y de año (0.1459ms)
+  ✔ diasEntre calcula la diferencia en días (con signo) (0.1245ms)
+✔ fechas (base de HU-009 y HU-012) (3.6877ms)
+▶ auth (base de HU-001)
+  ✔ hashPassword no guarda la contraseña en claro y usa sal distinta (76.1492ms)
+  ✔ verifyPassword acepta la correcta y rechaza la incorrecta (111.8056ms)
+  ✔ verifyPassword tolera hashes mal formados (0.2187ms)
+  ✔ nuevoToken genera valores únicos y largos (1.5858ms)
+✔ auth (base de HU-001) (190.1437ms)
+ℹ tests 26
+ℹ suites 4
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3564.553
