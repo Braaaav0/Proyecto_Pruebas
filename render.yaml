@@ -1,0 +1,20 @@
+# Blueprint de Render — despliegue de un clic.
+# En Render: New → Blueprint → elegir este repositorio → Apply.
+services:
+  - type: web
+    name: biblioteca
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    # seed:demo no hace nada si la base ya tiene libros, así que es seguro en cada arranque:
+    # tras un reinicio del plan gratuito (disco efímero) repuebla los datos de prueba.
+    startCommand: npm run seed:demo && npm start
+    healthCheckPath: /
+    envVars:
+      # Marca la cookie de sesión como Secure (Render sirve HTTPS).
+      - key: NODE_ENV
+        value: production
+      # Contraseñas iniciales: se aplican solo cuando la base aún no tiene cuentas.
+      # Para la actividad se dejan las documentadas en el README, de modo que
+      # quienes hagan las pruebas manuales puedan entrar sin pedir credenciales.
+      # Para cambiarlas, defina ADMIN_PASSWORD y BIBLIOTECARIO_PASSWORD aquí.

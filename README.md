@@ -25,6 +25,21 @@ npm start             # http://localhost:3000
 
 **Cambie las contraseñas antes de usarlo fuera de un entorno de práctica**: defina `ADMIN_PASSWORD` y `BIBLIOTECARIO_PASSWORD` antes del *primer* arranque (solo se aplican cuando la base de datos aún no tiene cuentas). Otras variables: `PORT` (3000), `DB_FILE` (`data/biblioteca.db`), `NODE_ENV=production` (marca la cookie como `Secure`; requiere HTTPS).
 
+## Despliegue (Render)
+
+La aplicación necesita un servidor que ejecute Node: GitHub Pages solo sirve archivos
+estáticos y no puede levantar Express ni SQLite.
+
+El repositorio incluye `render.yaml`, así que el despliegue es de un clic:
+**Render → New → Blueprint → elegir este repositorio → Apply**.
+
+- Plan gratuito, sin disco persistente: el servicio se suspende tras ~15 min sin
+  tráfico y, al reiniciarse, la base de datos vuelve a cero. `startCommand` ejecuta
+  `npm run seed:demo` antes de arrancar, de modo que cada sesión de pruebas empieza
+  siempre con los mismos datos de ejemplo.
+- `NODE_ENV=production` marca la cookie de sesión como `Secure` (Render sirve HTTPS).
+- Versión de Node fijada en `.node-version` (24.19.0); se requiere ≥ 22.13 por `node:sqlite`.
+
 ## Pruebas
 
 ```bash
