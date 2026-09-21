@@ -466,7 +466,7 @@ paso deja el sistema listo para el siguiente.
 | 12 | **Libros** → **+ Nuevo libro**, autocompletar desde Open Library | Rellena título, año e ISBN | 007 |
 | 13 | Completar y guardar; mirar la columna **Disponibilidad** | Se crea, marcado **Disponible** | 007 |
 | 14 | **Estados de préstamo** | 3 estados; sin botones de crear/eliminar | 008 |
-| 15 | Renombrar «Prestado» a «En préstamo» | Cambia el nombre, **no** el código | 008 |
+| 15 | Renombrar «Prestado» a «En préstamo» y **volver a dejarlo como estaba** | Cambia el nombre, **no** el código | 008 |
 | 16 | **Préstamos** → prestar el libro nuevo al usuario nuevo, 14 días | «Devolver antes del …», fecha correcta | 009 |
 | 17 | Abrir de nuevo la lista **Libro disponible** | El libro prestado ya **no** está | 009 |
 | 18 | **Libros prestados** → filtrar por el nombre del usuario | Aparece solo su préstamo | 011 |
